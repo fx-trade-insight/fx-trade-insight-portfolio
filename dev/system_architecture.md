@@ -29,10 +29,10 @@ flowchart LR
 
     subgraph Sales["販売チャネル"]
         Note["Note\n有料記事"]
-        BOOTH["BOOTH\nデジタルDL"]
-        Drive["Google Drive\nexe配布（Note用）"]
+        BOOTH["BOOTH\n商品ページ"]
+        GHReleases["GitHub Releases\nexe配布（共通）"]
         Note -.->|"フォームURL掲載"| Forms
-        Note -.->|"exeリンク掲載"| Drive
+        Note -.->|"exeリンク掲載"| GHReleases
         BOOTH -.->|"フォームURL掲載"| Forms
     end
 
@@ -56,9 +56,9 @@ flowchart LR
 | **Googleフォーム（Note用）** | Google | Note購入者からのキー申請受付。注文ID＋メールアドレスを入力 |
 | **Googleフォーム（BOOTH用）** | Google | BOOTH購入者からのキー申請受付。メールアドレスのみ入力 |
 | **Gmail（販売者）** | Google | Note購入通知の受信 / ライセンスキーのユーザーへの送信 |
-| **Note** | 外部 | 販売プラットフォーム。有料記事内にフォームURLとGoogle DriveのexeリンクURL掲載 |
-| **BOOTH** | 外部 | 販売プラットフォーム。exeを直接ダウンロード可能（約200MB）。DLページにフォームURL掲載 |
-| **Google Drive** | Google | Note購入者向けexeファイル配布 |
+| **Note** | 外部 | 販売プラットフォーム。有料記事内にフォームURLとGitHub ReleasesのexeリンクURL掲載 |
+| **BOOTH** | 外部 | 販売プラットフォーム。DLページにフォームURLとGitHub ReleasesのURL掲載 |
+| **GitHub Releases** | GitHub | BOOTH・Note両購入者向けexeファイル配布（`/releases/latest` で常に最新版） |
 | **Discord** | 外部 | 問い合わせ通知の受信先。GASがWebhookで転送（URLはGASスクリプトプロパティで管理） |
 
 > **重要**: GASを実行するGoogleアカウント = Note購入通知メールを受信するGmailアカウント である必要があります。
@@ -136,9 +136,11 @@ Electronアプリ                            GAS (https://script.google.com/...)
 ─────────────────────────────────────>   ・有効フラグがTRUEか
                                           ・登録台数が2台未満か → マシンIDを登録
 <─────────────────────────────────────
-  {"status":"OK"}                           ↓ 成功
-  → アプリ使用開始                        {"status":"ERROR","code":"MACHINE_LIMIT_EXCEEDED"}
-                                            ↓ 失敗（エラーメッセージ表示）
+  {"status":"OK",                          ↓ 成功
+   "latestVersion":"1.0.0"}             {"status":"ERROR","code":"MACHINE_LIMIT_EXCEEDED"}
+  → アプリ使用開始                        ↓ 失敗（エラーメッセージ表示）
+  → latestVersion が現在バージョンより
+    新しければ画面上部にアップデートバナーを表示
 
 
   【2回目以降の起動時 (バックグラウンド)】
@@ -150,8 +152,10 @@ Electronアプリ                            GAS (https://script.google.com/...)
   &machineId=abc123...                   ・マシンIDが登録済みか
 ─────────────────────────────────────>
 <─────────────────────────────────────
-  {"status":"OK"}                        {"status":"ERROR","code":"KEY_REVOKED"}
-  → 継続使用                             → 即座にライセンス画面へ遷移
+  {"status":"OK",                        {"status":"ERROR","code":"KEY_REVOKED"}
+   "latestVersion":"1.0.0"}             → 即座にライセンス画面へ遷移
+  → 継続使用
+  → latestVersion が新しければアップデートバナー表示
 
                                          {"status":"ERROR","code":"MACHINE_NOT_REGISTERED"}
                                          → 自動再アクティベートを試みる（activate再送信）
