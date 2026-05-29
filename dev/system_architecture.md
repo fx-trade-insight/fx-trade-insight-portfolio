@@ -292,6 +292,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 ## 関連ドキュメント
 
 ### 技術仕様
+- [`docs/dev/goto_day_spec.md`](./goto_day_spec.md) — ゴトー日判定仕様（定義・振替ルール・31日特例・年末年始除外・2026年一覧）
 - [`docs/dev/license_system_spec.md`](./license_system_spec.md) — ライセンス認証システムの詳細仕様（Note・BOOTH両対応）
 - [`docs/dev/database_spec.md`](./database_spec.md) — SQLiteテーブル定義・user_settingキー一覧
 - [`docs/dev/csv_format_notes.md`](./csv_format_notes.md) — 口座別CSVフォーマット仕様
