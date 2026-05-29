@@ -334,6 +334,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 - [`docs/sales/support_policy.md`](../sales/support_policy.md) — サポート運用方針
 - [`docs/sales/booth_listing.md`](../sales/booth_listing.md) — BOOTH商品ページ用テキスト・ダウンロードページメッセージ
 - [`docs/sales/note_article.md`](../sales/note_article.md) — Note販売記事
+- [`docs/sales/email_templates.md`](../sales/email_templates.md) — メールテンプレート集（自動送信・手動送信）
 
 ### ユーザー向けドキュメント
 公開リポジトリ（[fx-trade-insight/fx-trade-insight](https://github.com/fx-trade-insight/fx-trade-insight)）にも配置。
