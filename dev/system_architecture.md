@@ -271,14 +271,17 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 **前提**
 - ファイル名 `yyyy-MM-dd HH-mm-ss[-SSS].mp4` から開始時刻をパースする。それ以外の形式のファイルは無視される。
 - ファイルの **mtime（OS更新日時）を録画終了時刻として扱う**。録画が終わるとファイルへの書き込みが止まり mtime が確定するため。
+- **注意**: 録画ファイルを別のPCにコピーすると mtime がコピー日時にリセットされる。この場合、`エントリー時刻 <= endTime(mtime)` は成立するが `diffSeconds`（エントリー位置）が分割間隔＋バッファを大幅に超えた値になる可能性がある。
 
 **検索手順**
 
 1. `startTime <= エントリー時刻` のファイルを抽出し、開始時刻の新しい順に並べる
 2. 先頭から順に `エントリー時刻 <= endTime(mtime)` を満たす最初のファイルを選ぶ
    - 短い録画（数秒〜数十秒）が間に挟まっている場合は自動的にスキップされ、より古い長い録画にフォールバックする
-3. 再生開始位置 = `(エントリー時刻 - startTime) - prerollSeconds`（秒）
-4. 次ファイル = `startTime` が選択ファイルの `startTime + splitInterval + バッファ` 以内の次の録画ファイル
+3. **位置バリデーション**: `diffSeconds > (splitInterval + VIDEO_GAP_BUFFER_MINUTES) * 60` の場合は `null` を返す
+   - mtime がコピー等で変わっている場合の誤マッチを防ぐ（そのファイルに含まれるはずがない位置は無効とみなす）
+4. 再生開始位置 = `(エントリー時刻 - startTime) - prerollSeconds`（秒）
+5. 次ファイル = `startTime` が選択ファイルの `startTime + splitInterval + バッファ` 以内の次の録画ファイル
 
 **設定値**
 
@@ -287,6 +290,19 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 | `preroll_seconds` | 15秒 | エントリー時刻の何秒前から再生するか |
 | `split_interval` | 120分 | 分割録画間隔。次ファイル検索の上限に使用 |
 | `VIDEO_GAP_BUFFER_MINUTES` | 定数参照 | 分割間隔に加算する余裕時間 |
+
+### メディアファイルの保存パス
+
+スクリーンショットとクリップは `movie_storage` 配下に相対パスで保存される。
+
+| 種別 | 保存パス | 備考 |
+|------|---------|------|
+| エントリースクショ | `screenshots/YYYY-MM/{tradeId}_entry.png` | entry_time の年月でサブフォルダ分け |
+| イグジットスクショ | `screenshots/YYYY-MM/{tradeId}_exit.png` | entry_time の年月でサブフォルダ分け |
+| クリップ | `clips/YYYY-MM/{tradeId}.mp4` | entry_time の年月でサブフォルダ分け |
+
+- `YYYY-MM` は entry_time から `getYearMonthFromEntryTime()` で算出（`src/main/ipc/helpers.ts`）
+- 旧形式の絶対パスまたはフラットな相対パスも `resolveMediaPath()` で後方互換的に解決される
 
 ---
 
