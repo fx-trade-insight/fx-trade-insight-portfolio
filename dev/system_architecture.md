@@ -239,6 +239,48 @@ fx-trade-insight/
 
 録画・再生設定画面から録画を開始できます。スケジュール設定により自動開始・自動終了が可能です。ファイルは `年-月-日 時-分-秒-ミリ秒.mp4` 形式で保存先フォルダに保存されます。
 
+#### 録画の仕組み（音声アーキテクチャ）
+
+録画機能は映像・音声で異なる方式を組み合わせて実現しています。
+
+| 対象 | 方式 | 実装箇所 |
+|------|------|----------|
+| 映像（画面キャプチャ） | ffmpeg（gdigrab / ddagrab） | `recorderProcess.ts` |
+| マイク音声 | ffmpeg DirectShow（dshow） | `recorderProcess.ts` |
+| デスクトップ音声（システム音声） | Electron `getDisplayMedia` (WASAPI ループバック) | `RecorderStatusBar.tsx` |
+
+**デスクトップ音声に ffmpeg を使わない理由**
+
+ffmpeg の WASAPI ループバック（`-f wasapi -loopback`）は Windows のプライバシー保護やデバイス列挙の制約により安定して動作しないケースが多い。そのため、Electron（Chromium）が提供する `navigator.mediaDevices.getDisplayMedia({ audio: true, video: true })` を使用する。これは `setDisplayMediaRequestHandler` によってダイアログなしで自動的にシステム音声ストリームを取得する。
+
+**デスクトップ音声の録音・マージフロー**
+
+```
+[録画開始]
+  レンダラー: getDisplayMedia → MediaRecorder(opus/webm) 開始
+  メインプロセス: ffmpeg 起動（映像 + マイクのみ録音 → .mp4）
+
+[録画中]
+  レンダラー: 1秒ごとに音声チャンクを IPC (appendDesktopAudio) 経由で
+              メインプロセスの一時ファイル (.webm) にストリーミング書き込み
+
+[録画停止]
+  レンダラー: MediaRecorder.stop() → 全チャンク書き込み完了を待機
+  レンダラー: finalizeDesktopAudio(startTimeMs) をメインプロセスに通知
+  メインプロセス: ffmpeg で .webm と .mp4 をバックグラウンドマージ
+    - マイク音声なし: デスクトップ音声のみ .mp4 に合成
+    - マイク音声あり: amix フィルターで両者をミックス
+```
+
+**予約録画時のデスクトップ音声**
+
+予約録画はメインプロセスが自動起動するため、レンダラーに `recorder:statusChanged { type: 'started', bySchedule: true }` を送信し、レンダラーが設定を読んでデスクトップ音声キャプチャを自動開始する。停止時も同様に `stopped` イベントでレンダラーが停止・フィナライズを実行する。
+
+**音量倍率**
+
+- `micGain`: ffmpeg の `-af volume=X` または filter_complex の `volume=` フィルターとして適用（録画時）
+- `desktopAudioGain`: マージ時の ffmpeg で `-af volume=X` として適用（録画停止後）
+
 ### Bandicam による外部録画
 
 Bandicam で録画した動画もこのアプリで再生できることを確認済みです。
