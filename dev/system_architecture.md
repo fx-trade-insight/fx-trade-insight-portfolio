@@ -384,6 +384,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 
 ### 販売・マーケティング
 - [`docs/sales/sales_preparation.md`](../sales/sales_preparation.md) — 販売準備チェックリスト
+- [`docs/sales/freelance_dev_setup.md`](../sales/freelance_dev_setup.md) — 受注開発セットアップガイド（プラットフォーム・プロフィール・価格設定）
 - [`docs/sales/note/article_free.md`](../sales/note/article_free.md) — Note無料紹介記事
 - [`docs/sales/note/article_paid.md`](../sales/note/article_paid.md) — Note有料販売記事
 - [`docs/sales/note/article_faq_prepurchase.md`](../sales/note/article_faq_prepurchase.md) — Note購入前FAQ記事
