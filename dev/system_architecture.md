@@ -384,11 +384,11 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 
 ### 販売・マーケティング
 - [`docs/sales/sales_preparation.md`](../sales/sales_preparation.md) — 販売準備チェックリスト
-- [`docs/sales/policies/legal_notices.md`](../sales/policies/legal_notices.md) — 特定商取引法に基づく表記 / 利用規約
-- [`docs/sales/policies/privacy_policy.md`](../sales/policies/privacy_policy.md) — プライバシーポリシー
-- [`docs/sales/policies/support_policy.md`](../sales/policies/support_policy.md) — サポート運用方針
 - [`docs/sales/note/article_free.md`](../sales/note/article_free.md) — Note無料紹介記事
 - [`docs/sales/note/article_paid.md`](../sales/note/article_paid.md) — Note有料販売記事
+- [`docs/sales/note/article_faq_prepurchase.md`](../sales/note/article_faq_prepurchase.md) — Note購入前FAQ記事
+- [`docs/sales/note/legal_notices.md`](../sales/note/legal_notices.md) — 特定商取引法に基づく表記 / 利用規約
+- [`docs/sales/note/privacy_policy.md`](../sales/note/privacy_policy.md) — プライバシーポリシー
 - [`docs/sales/email_templates.md`](../sales/email_templates.md) — メールテンプレート集（自動送信・手動送信）
 
 ### ユーザー向けドキュメント
