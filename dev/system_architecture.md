@@ -388,11 +388,12 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 
 ### 販売・マーケティング
 - [`docs/sales/sales_preparation.md`](../sales/sales_preparation.md) — 販売準備チェックリスト（Note・BOOTH）
-- [`docs/sales/legal_notices.md`](../sales/legal_notices.md) — 特定商取引法に基づく表記 / 利用規約
-- [`docs/sales/privacy_policy.md`](../sales/privacy_policy.md) — プライバシーポリシー
-- [`docs/sales/support_policy.md`](../sales/support_policy.md) — サポート運用方針
-- [`docs/sales/booth_listing.md`](../sales/booth_listing.md) — BOOTH商品ページ用テキスト・ダウンロードページメッセージ
-- [`docs/sales/note_article.md`](../sales/note_article.md) — Note販売記事
+- [`docs/sales/policies/legal_notices.md`](../sales/policies/legal_notices.md) — 特定商取引法に基づく表記 / 利用規約
+- [`docs/sales/policies/privacy_policy.md`](../sales/policies/privacy_policy.md) — プライバシーポリシー
+- [`docs/sales/policies/support_policy.md`](../sales/policies/support_policy.md) — サポート運用方針
+- [`docs/sales/booth/listing.md`](../sales/booth/listing.md) — BOOTH商品ページ用テキスト・ダウンロードページメッセージ
+- [`docs/sales/note/article_free.md`](../sales/note/article_free.md) — Note無料紹介記事
+- [`docs/sales/note/article_paid.md`](../sales/note/article_paid.md) — Note有料販売記事
 - [`docs/sales/email_templates.md`](../sales/email_templates.md) — メールテンプレート集（自動送信・手動送信）
 
 ### ユーザー向けドキュメント

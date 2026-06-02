@@ -39,7 +39,7 @@ FXトレーダーの振り返りを効率化する Windows 向けデスクトッ
 ## 主な機能
 
 ### 取引履歴の取込・管理
-- GMOクリック証券・DMM FX・楽天証券・SBI FXなど主要口座のCSVに対応
+- 国内主要FX会社14社のCSVに対応（GMOクリック証券・DMM FX・楽天FX・外為どっとコム・FXTF・松井証券・外貨ex・ヒロセ通商・JFX・OANDA証券・LINE FX・みんなのFX・LIGHT FX・SBI FX）
 - タグ・エントリー理由・メモの記録
 - 取引履歴のフィルタ・ソート・CSVエクスポート
 
@@ -119,7 +119,7 @@ flowchart LR
 
 ## 動作環境
 
-- Windows 10 / 11（64bit）
+- Windows 11（64bit）
 - メモリ 8GB 以上推奨（録画使用時は 16GB 以上推奨）
 - MT5（チャートプロット・EA機能を使う場合）
 
@@ -158,6 +158,16 @@ fx-trade-insight/
 │   └── mt5/                   # MT5 EA（MQL5）
 └── docs/                      # 仕様書・販売ドキュメント
 ```
+
+---
+
+## リリース・購入
+
+| | リンク |
+|---|---|
+| 最新リリース（exe） | https://github.com/fx-trade-insight/fx-trade-insight/releases/latest |
+| 購入ページ（note） | https://note.com/makio_system/n/n2d0e39dc4a6c |
+| 機能紹介（note無料記事） | https://note.com/makio_system/n/nbbcd8724ff7d |
 
 ---
 
