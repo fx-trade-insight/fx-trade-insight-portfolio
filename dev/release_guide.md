@@ -134,7 +134,7 @@ VirtualBox を使ったテスト手順は [`docs/dev/virtualbox_test_guide.md`](
 ## 5. VirusTotal スキャン
 
 ビルドした `.exe` を [virustotal.com](https://www.virustotal.com) にアップロードしてスキャンする。
-スキャン結果のURLをコピーしておき、GitHub Releases の説明欄・BOOTH/Note の販売ページに掲載する。
+スキャン結果のURLをコピーしておき、GitHub Releases の説明欄・Note の販売ページに掲載する。
 
 > 証明書なしの期間は誤検知が出やすい。掲載することでユーザーへの信頼材料になる。
 
@@ -173,11 +173,6 @@ VirusTotal スキャン結果（0/72）：https://www.virustotal.com/gui/file/..
 ---
 
 ## 7. 販売ページの更新
-
-### BOOTH
-1. BOOTH 管理画面を開く
-2. 商品説明文のバージョン表記を更新する
-3. セキュリティセクションの VirusTotal スキャン結果URLを更新する
 
 ### Note
 1. Note の有料記事を開いて編集モードに入る
@@ -276,7 +271,7 @@ npm run build
 [ ] git tag & push
 [ ] GitHub Releases を作成・exe をアップロード
 [ ] GitHub Releases の説明欄に VirusTotal スキャン結果URLを記載
-[ ] BOOTH・Note の商品説明文のバージョン表記と VirusTotal URLを更新
+[ ] Note の商品説明文のバージョン表記と VirusTotal URLを更新
 [ ] GAS スクリプトプロパティの LATEST_VERSION を更新
 [ ] （GAS コードに変更があれば）clasp push & 再デプロイ
 ```

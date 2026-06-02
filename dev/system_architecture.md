@@ -23,17 +23,15 @@ flowchart LR
         Forms["Googleフォーム\nキー申請受付"]
         GAS <-->|"読み書き"| Sheet
         GAS -->|"メール送信"| Gmail
-        Gmail -.->|"Note/BOOTH購入通知監視"| GAS
+        Gmail -.->|"Note購入通知監視"| GAS
         Forms -->|"フォーム送信"| GAS
     end
 
     subgraph Sales["販売チャネル"]
         Note["Note\n有料記事"]
-        BOOTH["BOOTH\n商品ページ"]
-        GHReleases["GitHub Releases\nexe配布（共通）"]
+        GHReleases["GitHub Releases\nexe配布"]
         Note -.->|"フォームURL掲載"| Forms
         Note -.->|"exeリンク掲載"| GHReleases
-        BOOTH -.->|"フォームURL掲載"| Forms
     end
 
     Discord["Discord\n（問い合わせ通知）"]
@@ -54,11 +52,9 @@ flowchart LR
 | **GAS** | Google | ライセンス認証サーバー兼問い合わせ中継。メール監視・キー発行・検証API・Discord Webhook転送を担当 |
 | **Googleスプレッドシート** | Google | 注文IDとライセンス情報の永続化 |
 | **Googleフォーム（Note用）** | Google | Note購入者からのキー申請受付。注文ID＋メールアドレスを入力 |
-| **Googleフォーム（BOOTH用）** | Google | BOOTH購入者からのキー申請受付。メールアドレスのみ入力 |
 | **Gmail（販売者）** | Google | Note購入通知の受信 / ライセンスキーのユーザーへの送信 |
 | **Note** | 外部 | 販売プラットフォーム。有料記事内にフォームURLとGitHub ReleasesのexeリンクURL掲載 |
-| **BOOTH** | 外部 | 販売プラットフォーム。DLページにフォームURLとGitHub ReleasesのURL掲載 |
-| **GitHub Releases** | GitHub | BOOTH・Note両購入者向けexeファイル配布（`/releases/latest` で常に最新版） |
+| **GitHub Releases** | GitHub | Note購入者向けexeファイル配布（`/releases/latest` で常に最新版） |
 | **Discord** | 外部 | 問い合わせ通知の受信先。GASがWebhookで転送（URLはGASスクリプトプロパティで管理） |
 
 > **重要**: GASを実行するGoogleアカウント = Note購入通知メールを受信するGmailアカウント である必要があります。
@@ -376,7 +372,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 ### 技術仕様
 - [`docs/dev/code_signing_plan.md`](./code_signing_plan.md) — コード署名証明書の導入計画（取得手順・electron-builder への反映方法）
 - [`docs/dev/goto_day_spec.md`](./goto_day_spec.md) — ゴトー日判定仕様（定義・振替ルール・31日特例・年末年始除外・2026年一覧）
-- [`docs/dev/license_system_spec.md`](./license_system_spec.md) — ライセンス認証システムの詳細仕様（Note・BOOTH両対応）
+- [`docs/dev/license_system_spec.md`](./license_system_spec.md) — ライセンス認証システムの詳細仕様
 - [`docs/dev/database_spec.md`](./database_spec.md) — SQLiteテーブル定義・user_settingキー一覧
 - [`docs/dev/csv_format_notes.md`](./csv_format_notes.md) — 口座別CSVフォーマット仕様
 - [`docs/dev/clasp_guide.md`](./clasp_guide.md) — GAS/claspの運用手順
@@ -387,11 +383,10 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 - [`docs/personal/notification_system_redesign.md`](../personal/notification_system_redesign.md) — 個人用通知システムの構成（MT5 EA・GAS価格アラート・X速報）。アプリ本体とは独立した個人運用ツール。
 
 ### 販売・マーケティング
-- [`docs/sales/sales_preparation.md`](../sales/sales_preparation.md) — 販売準備チェックリスト（Note・BOOTH）
+- [`docs/sales/sales_preparation.md`](../sales/sales_preparation.md) — 販売準備チェックリスト
 - [`docs/sales/policies/legal_notices.md`](../sales/policies/legal_notices.md) — 特定商取引法に基づく表記 / 利用規約
 - [`docs/sales/policies/privacy_policy.md`](../sales/policies/privacy_policy.md) — プライバシーポリシー
 - [`docs/sales/policies/support_policy.md`](../sales/policies/support_policy.md) — サポート運用方針
-- [`docs/sales/booth/listing.md`](../sales/booth/listing.md) — BOOTH商品ページ用テキスト・ダウンロードページメッセージ
 - [`docs/sales/note/article_free.md`](../sales/note/article_free.md) — Note無料紹介記事
 - [`docs/sales/note/article_paid.md`](../sales/note/article_paid.md) — Note有料販売記事
 - [`docs/sales/email_templates.md`](../sales/email_templates.md) — メールテンプレート集（自動送信・手動送信）
@@ -399,7 +394,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 ### ユーザー向けドキュメント
 公開リポジトリ（[fx-trade-insight/fx-trade-insight](https://github.com/fx-trade-insight/fx-trade-insight)）にも配置。
 
-- [`docs/user/user_install_guide.md`](../user/user_install_guide.md) — インストール手順書（Note・BOOTH対応）
+- [`docs/user/user_install_guide.md`](../user/user_install_guide.md) — インストール手順書
 - [`docs/user/user_setup_guide.md`](../user/user_setup_guide.md) — 初回セットアップ手順書
 - [`docs/user/user_pc_migration_guide.md`](../user/user_pc_migration_guide.md) — PC移行手順書
 - [`docs/user/user_faq.md`](../user/user_faq.md) — よくある質問（FAQ）
