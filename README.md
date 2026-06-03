@@ -12,8 +12,7 @@ FXトレーダーの振り返りを効率化する Windows 向けデスクトッ
 
 ## デモ動画
 
-<!-- デモ動画が用意できたら差し替え -->
-> 準備中
+[![デモ動画](https://img.youtube.com/vi/ZoS4clDNwQU/0.jpg)](https://www.youtube.com/watch?v=ZoS4clDNwQU)
 
 ---
 
