@@ -378,6 +378,7 @@ Bandicam で録画した動画もこのアプリで再生できることを確�
 - [`docs/dev/clasp_guide.md`](./clasp_guide.md) — GAS/claspの運用手順
 - [`docs/dev/virtualbox_test_guide.md`](./virtualbox_test_guide.md) — VirtualBoxを使ったクリーン環境テスト手順
 - [`docs/dev/release_guide.md`](./release_guide.md) — リリース・バージョンアップ手順（ブランチ戦略・ビルド・GitHub Releases・配布）
+- [`docs/dev/futures_spec.md`](./futures_spec.md) — 先物取引機能仕様（`main` ブランチ・`FUTURES_FEATURE_ENABLED` フラグで表示制御、松井証券日経225対応）
 
 ### 個人運用ツール（アプリ外）
 - [`docs/personal/notification_system_redesign.md`](../personal/notification_system_redesign.md) — 個人用通知システムの構成（MT5 EA・GAS価格アラート・X速報）。アプリ本体とは独立した個人運用ツール。
